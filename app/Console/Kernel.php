@@ -21,7 +21,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('investment-criteria')->everyMinute();
         // $schedule->command('amc-basic-info')->everyMinute();
         //  $schedule->command('fund-benchmark')->everyMinute();
-           $schedule->command('fundnet-asset')->everyMinute();
+        //    $schedule->command('fundnet-asset')->everyMinute();
+        //    $schedule->command('fund-manager')->everyMinute();
+           $schedule->command('total-return')->everyMinute();
         
     }
 

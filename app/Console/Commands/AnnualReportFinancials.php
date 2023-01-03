@@ -47,7 +47,6 @@ class AnnualReportFinancials extends Command
     {
         Log::info('Annual report fees - start');
         try {
-
             $response       =   Http::get('https://api.morningstar.com/v2/service/mf/v92dw4hxtlpn3k9x/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');          
             $data           =   json_decode($response, true);
 

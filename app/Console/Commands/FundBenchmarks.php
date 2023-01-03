@@ -60,9 +60,7 @@ class FundBenchmarks extends Command
                         if (key_exists('FB-PrimaryProspectusBenchmarks', $value['api'])) {
 
                             foreach ($value['api']['FB-PrimaryProspectusBenchmarks']  as  $row) {
-
-      
-
+    
                                 $this->store_data($value, $row);
                             }
                         } else {
