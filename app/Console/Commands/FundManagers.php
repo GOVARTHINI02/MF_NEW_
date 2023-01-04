@@ -90,16 +90,16 @@ class FundManagers extends Command
     function store_data($value,$row)
     {
 
-      $details                                =   new FundManager;
-      $details->MStarID                       =   $value['api']['DP-MStarID'] ?? null;
-      $details->ISIN                          =   $value['api']['DP-ISIN'] ?? null;
-      $details->FundManagerTenureAverage      =   $value['api']['FM-FundManagerTenureAverage'] ?? null;
-      $details->Display                       =   $row['Display'] ?? null;
-      $details->ManagerId                     =   $row['ManagerId'] ?? null;
-      $details->Name                          =   $row['Name'] ?? null;
-      $details->Role                          =   $row['Role'] ?? null;
-      $details->StartDate                     =   $row['StartDate'] ?? null;
-      $details->Tenure                        =   $row['Tenure'] ?? null;
+      $details                                =     new FundManager;
+      $details->MStarID                       =     $value['api']['DP-MStarID'] ?? null;
+      $details->ISIN                          =     $value['api']['DP-ISIN'] ?? null;
+      $details->FundManagerTenureAverage      =     $value['api']['FM-FundManagerTenureAverage'] ?? null;
+      $details->Display                       =     $row['Display'] ?? null;
+      $details->ManagerId                     =     $row['ManagerId'] ?? null;
+      $details->Name                          =     $row['Name'] ?? null;
+      $details->Role                          =     $row['Role'] ?? null;
+      $details->StartDate                     =     $row['StartDate'] ?? null;
+      $details->Tenure                        =     $row['Tenure'] ?? null;
       $details->save();
 
     }

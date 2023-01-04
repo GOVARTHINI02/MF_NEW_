@@ -16,14 +16,19 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('annual-report-fee')->everyMinute();
-        // $schedule->command('annual-report-financials')->everyMinute();
+        //  $schedule->command('annual-report-financials')->everyMinute();
         // $schedule->command('fee-schedules')->everyMinute();
         // $schedule->command('investment-criteria')->everyMinute();
         // $schedule->command('amc-basic-info')->everyMinute();
         //  $schedule->command('fund-benchmark')->everyMinute();
         //    $schedule->command('fundnet-asset')->everyMinute();
         //    $schedule->command('fund-manager')->everyMinute();
-           $schedule->command('total-return')->everyMinute();
+        //    $schedule->command('total-return')->everyMinute();
+        //    $schedule->command('current-price')->everyMinute();
+        //    $schedule->command('morningstar-rating')->everyMinute();
+            // $schedule->command('dailynav-performance')->everyMinute();
+            $schedule->command('isin')->everyMinute();
+        
         
     }
 

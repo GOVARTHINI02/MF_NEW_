@@ -72,7 +72,7 @@ class AnnualReportFinancials extends Command
             }
         } catch (\Throwable $th) {
 
-            $schedule   =   'Annual Report Financials';
+            $schedule       =   'Annual Report Financials';
             Log::info($th);
             AnnualReportFinancial::whereDate('created_at', Carbon::today())->delete();
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));

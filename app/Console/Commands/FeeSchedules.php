@@ -88,7 +88,6 @@ class FeeSchedules extends Command
 
     function store_data($value, $row)
     {
-
         $details                                    =   new FeeSchedule();
         $details->MStarID                           =   $value['api']['DP-MStarID'] ?? null;
         $details->ISIN                              =   $value['api']['DP-ISIN'] ?? null;

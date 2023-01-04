@@ -39,8 +39,8 @@ class MFController extends Controller
     public function create()
     {
 
-        $response       =   Http::get('https://api.morningstar.com/v2/service/mf/x2plgdu4r8bj1pyi/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
-        print_r('<pre>');
+        $response       =   Http::get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+        // print_r('<pre>');
         $data           =   json_decode($response, true);
         print_r($data);
         die;
