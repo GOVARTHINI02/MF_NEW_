@@ -11,6 +11,7 @@ use App\Models\FundBenchmarks;
 use App\Models\FundManager;
 use App\Models\FundNetAsset;
 use App\Models\InvestmentCriteria;
+use App\Models\Top10Holding;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Return_;
+
+use function Ramsey\Uuid\v1;
 
 class MFController extends Controller
 {
@@ -42,17 +45,39 @@ class MFController extends Controller
         $response       =   Http::get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
         // print_r('<pre>');
         $data           =   json_decode($response, true);
-        print_r($data);
-        die;
+        // print_r($data);
+        // die;
         if ($data['status']['message'] == "OK") {
 
 
             foreach ($data['data'] as $value) {
-                if(key_exists('api', $value)) {
+                
 
-                    if(key_exists('FM-Managers', $value['api'])){
-                        foreach ($value['api']['FM-Managers'] as $row) {
-                            $this->stores($value, $row);
+                if (key_exists('api', $value)) {
+                           
+                          
+                    if (key_exists('T10HV2-HoldingDetail', $value['api'])) {
+                        foreach ($value['api']['T10HV2-HoldingDetail'] as $rows) {
+                            $details                                    =    new Top10Holding;
+                            $details->MstarID                           =  $value['_id'] ?? null; 
+                            $details->ISIN                              =  $rows['ISIN'] ?? null;
+                            $details->HoldingType                       =  $rows['HoldingType'] ?? null;
+                            $details->Name                              =  $rows['Name'] ?? null;
+                            $details->Weighting                         =  $rows['Weighting'] ?? null;
+                            $details->NumberOfShare                     =  $rows['NumberOfShare'] ?? null;
+                            $details->MarketValue                       =  $rows['MarketValue'] ?? null;
+                            $details->ShareChange                       =  $rows['ShareChange'] ?? null;
+                            $details->MaturityDate                      =  $rows['MaturityDate'] ?? null;
+                            $details->IndianCreditQualityClassification =  $rows['IndianCreditQualityClassification'] ?? null;
+                            $details->SectorId                          =  $rows['SectorId'] ?? null;
+                            $details->Sector                            =  $rows['Sector'] ?? null;
+                            $details->GlobalSectorId                    =  $rows['GlobalSectorId'] ?? null;
+                            $details->GlobalSector                      =  $rows['GlobalSector'] ?? null;
+                            $details->Ticker                            =  $rows['Ticker'] ?? null;
+                            $details->HoldingYTDReturn                  =  $rows['HoldingYTDReturn'] ?? null;
+                            $details->Stylebox                          =  $rows['Stylebox'] ?? null;
+                            $details->RegionId                          =  $rows['RegionId'] ?? null;
+                            $details->save();
                         }
                     }
                 }

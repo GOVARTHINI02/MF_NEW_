@@ -27,7 +27,8 @@ class Kernel extends ConsoleKernel
         //    $schedule->command('current-price')->everyMinute();
         //    $schedule->command('morningstar-rating')->everyMinute();
             // $schedule->command('dailynav-performance')->everyMinute();
-            $schedule->command('isin')->everyMinute();
+            // $schedule->command('isin')->everyMinute();
+            $schedule->command('top10holding')->everyMinute();
         
         
     }

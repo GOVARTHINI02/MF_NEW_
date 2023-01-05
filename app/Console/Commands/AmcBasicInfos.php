@@ -138,7 +138,6 @@ class AmcBasicInfos extends Command
                             $details->Transfer_CompanyPostalCode        =   $value['api']['AMCBI-TransferAgentCompanies'][0]['CompanyPostalCode'] ?? null;
                             $details->Transfer_CompanyAddress           =   $value['api']['AMCBI-TransferAgentCompanies'][0]['CompanyAddress'] ?? null;
                             $details->save();
-
                             $i++;
                         } while ($count > $i);
                     }
