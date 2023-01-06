@@ -45,7 +45,7 @@ class AnnualReportFinancials extends Command
      */
     public function handle()
     {
-        Log::info('Annual report fees - start');
+        Log::info('Annual report financial - start');
         try {
             $response       =   Http::get('https://api.morningstar.com/v2/service/mf/v92dw4hxtlpn3k9x/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');          
             $data           =   json_decode($response, true);
@@ -55,6 +55,7 @@ class AnnualReportFinancials extends Command
                 foreach ($data['data'] as $value) {
 
                     if (key_exists('api', $value)) {
+                        
                         $details                                    =   new AnnualReportFinancial;
                         $details->MStarID                           =   $value['api']['DP-MStarID'] ?? null;
                         $details->ISIN                              =   $value['api']['DP-ISIN'] ?? null;
@@ -68,17 +69,17 @@ class AnnualReportFinancials extends Command
 
                 AnnualReportFinancial::where('created_at', '<', Carbon::today())->delete();
             } else {
-                Log::info('Annual report fees - error' . $response);
+                Log::info('Annual report financial - error' . $response);
             }
         } catch (\Throwable $th) {
 
-            $schedule       =   'Annual Report Financials';
+            $schedule       =   'Annual Report Financial';
             Log::info($th);
             AnnualReportFinancial::whereDate('created_at', Carbon::today())->delete();
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));
         
         }
 
-        Log::info('Annual report fees - end');
+        Log::info('Annual report financial - end');
     }
 }

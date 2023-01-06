@@ -43,7 +43,7 @@ class Top10Holdings extends Command
      */
     public function handle()
     {
-        Log::info('Top10Holdings - Start');
+        Log::info('Top10Holding - Start');
         try {
 
             $response  =  Http::get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
@@ -51,11 +51,15 @@ class Top10Holdings extends Command
             $data = json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {
+
                 foreach ($data['data'] as $value) {
 
                     if (key_exists('api', $value)) {
+
                         if (key_exists('T10HV2-HoldingDetail', $value['api'])) {
+
                             foreach ($value['api']['T10HV2-HoldingDetail'] as $rows) {
+
                                 $details                                    =    new Top10Holding            ;
                                 $details->MstarID                           =   $value['_id'] ?? null;
                                 $details->ISIN                              =   $rows['ISIN'] ?? null;
@@ -79,12 +83,12 @@ class Top10Holdings extends Command
                             }
                         }
 
-                           Top10Holding::where('created_at', '<', Carbon::today())->delete();
+                        Top10Holding::where('created_at', '<', Carbon::today())->delete();
                     }
                 }
             } else {
 
-                Log::info('Top10Holdings - error' . $response);
+                Log::info('Top10Holding - error' . $response);
             }
         } catch (\Throwable $th) {
 
@@ -94,6 +98,6 @@ class Top10Holdings extends Command
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));
         }
 
-        Log::info('Top10Holdings - end');
+        Log::info('Top10Holding - end');
     }
 }

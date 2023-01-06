@@ -44,7 +44,7 @@ class TotalReturns extends Command
     public function handle()
     {
 
-        Log::info('Total Returns - Start');
+        Log::info('Total Return - Start');
         try {
             $response   =  Http::get('https://api.morningstar.com/v2/service/mf/x2plgdu4r8bj1pyi/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
 
@@ -78,16 +78,16 @@ class TotalReturns extends Command
                 }
                 TotalReturn::where('created_at', '<', Carbon::today())->delete();
             } else {
-                Log::info('Total Returns - error' . $response);
+                Log::info('Total Return - error' . $response);
             }
         } catch (\Throwable $th) {
 
-            $schedule   =   "Total - Returns";
+            $schedule   =   "Total - Return";
             Log::info($th);
             TotalReturn::whereDate('created_at', Carbon::today())->delete();
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));
         }
 
-        Log::info('Total Returns - End');
+        Log::info('Total Return - End');
     }
 }

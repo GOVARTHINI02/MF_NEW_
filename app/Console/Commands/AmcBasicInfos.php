@@ -47,25 +47,19 @@ class AmcBasicInfos extends Command
         try {
 
             $response       =   Http::get('https://api.morningstar.com/v2/service/mf/dctlquvshh3f2yvo/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
-
             $data           =   json_decode($response, true);
 
-
-
             if ($data['status']['message'] == "OK") {
-
 
                 foreach ($data['data'] as $value) {
 
                     $i = 0;
-
                     if (key_exists('api', $value)) {
-
 
                         $auditor    =   count($value['api']['AMCBI-AuditorCompanies'] ?? []);
                         $custodian  =   count($value['api']['AMCBI-CustodianCompanies'] ?? []);
-
                         $count      =   $auditor > $custodian ? $auditor :  $custodian;
+                        
                         do {
 
                             $details                                    =   new AmcBasicInfo;
@@ -144,6 +138,7 @@ class AmcBasicInfos extends Command
                 }
                 AmcBasicInfo::where('created_at', '<', Carbon::today())->delete();
             }else{
+                
                 Log::info('Amc Basic Info - error' . $response);
               
             }

@@ -70,7 +70,7 @@ class AnnualReportFee extends Command
                 Log::info('Annual report fees - error' . $response);
             }
         } catch (\Throwable $th) {
-            $schedule = "Annual Report Fee";
+            $schedule = "Annual Report Fees";
             Log::info($th);
             AnnualReportFees::whereDate('created_at', Carbon::today())->delete();
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));

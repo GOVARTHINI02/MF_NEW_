@@ -100,11 +100,8 @@ class DailyNavPerformances extends Command
         } catch (\Throwable $th) {
 
             $schedule  =  'Daily Nav Performance';
-
             Log::info($th);
-
             DailyNavPerformance::wheredate('created_at', Carbon::today())->delete();
-
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));
         }
 

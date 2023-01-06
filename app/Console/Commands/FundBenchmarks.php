@@ -89,8 +89,7 @@ class FundBenchmarks extends Command
     function store_data($value, $row)
     {
 
-        $details                        =  new FundBenchmark;
-
+        $details                        =   new FundBenchmark;
         $details->MStarID               =   $value['api']['DP-MStarID'] ?? null;
         $details->ISIN                  =   $value['api']['DP-ISIN'] ?? null;
         $details->PrimaryIndexId        =   $value['api']['FB-PrimaryIndexId'] ?? null;

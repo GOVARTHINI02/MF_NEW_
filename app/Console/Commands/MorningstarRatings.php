@@ -88,7 +88,7 @@ class MorningstarRatings extends Command
 
         } catch (\Throwable $th) {
 
-            $schedule = "Current - Price";
+            $schedule = "Morning star Rating";
             Log::info($th);
             MorningstarRating::whereDate('created_at', Carbon::today())->delete();
             Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));

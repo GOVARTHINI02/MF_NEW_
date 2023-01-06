@@ -15,20 +15,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('annual-report-fee')->everyMinute();
-        //  $schedule->command('annual-report-financials')->everyMinute();
-        // $schedule->command('fee-schedules')->everyMinute();
-        // $schedule->command('investment-criteria')->everyMinute();
-        // $schedule->command('amc-basic-info')->everyMinute();
-        //  $schedule->command('fund-benchmark')->everyMinute();
-        //    $schedule->command('fundnet-asset')->everyMinute();
-        //    $schedule->command('fund-manager')->everyMinute();
-        //    $schedule->command('total-return')->everyMinute();
-        //    $schedule->command('current-price')->everyMinute();
-        //    $schedule->command('morningstar-rating')->everyMinute();
-            // $schedule->command('dailynav-performance')->everyMinute();
-            // $schedule->command('isin')->everyMinute();
-            $schedule->command('top10holding')->everyMinute();
+        $schedule->command('annual-report-fee')->dailyAt('12:54');
+        $schedule->command('annual-report-financials')->dailyAt('12:58');
+        $schedule->command('fee-schedules')->dailyAt('13:03');
+        $schedule->command('investment-criteria')->dailyAt('13:07');
+        $schedule->command('amc-basic-info')->dailyAt('13:10');
+        $schedule->command('fund-benchmark')->dailyAt('13:46');
+        $schedule->command('fundnet-asset')->dailyAt('13:16');
+        $schedule->command('fund-manager')->dailyAt('13:19');
+        $schedule->command('total-return')->dailyAt('13:22');
+        $schedule->command('current-price')->dailyAt('13:49');
+        $schedule->command('morningstar-rating')->dailyAt('13:52');
+        $schedule->command('dailynav-performance')->dailyAt('13:32');
+        $schedule->command('isin')->dailyAt('13:36');
+        $schedule->command('top10holding')->dailyAt('13:40');
         
         
     }
