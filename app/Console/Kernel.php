@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('dailynav-performance')->dailyAt('13:32');
         $schedule->command('isin')->dailyAt('13:36');
         $schedule->command('top10holding')->dailyAt('13:40');
-        
+        $schedule->command('fund-basic-infos')->everyMinute();
+        $schedule->command('historic-navs')->everyMinute();
         
     }
 

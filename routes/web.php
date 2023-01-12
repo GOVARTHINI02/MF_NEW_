@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('new',[MFController::class,'create']);
+Route::get('api',[MFController::class,'store']);

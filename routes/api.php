@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MFController;
+use GuzzleHttp\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,7 @@ use App\Http\Controllers\MFController;
 |
 */
 
-Route::get('new', [MFController::class,'new']);
-// 
-// Route::get('new', function(Request $request) {
-//     return 'hi';
-// });
+Route::get('new',[MFController::class,'create']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
