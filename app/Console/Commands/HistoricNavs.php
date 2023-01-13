@@ -53,7 +53,7 @@ class HistoricNavs extends Command
 
             if ($data['status']['message'] == 'OK') {
 
-                foreach ($data['data']['price'] as $value) {
+                foreach ($data['data']['Prices'] as $value) {
 
                     $details             =    new HistoricNav;
                     $details->nav_date   =    $value['d'] ?? null;

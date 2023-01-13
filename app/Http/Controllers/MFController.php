@@ -39,12 +39,7 @@ class MFController extends Controller
 
     public function index()
     {
-        // Alice_category (Column)
-        // BroadCategoryGroup == Fixed Income      => Fixed income
-        // BroadCategoryGroup == Allocation        =>  Hybrid
-        // BroadCategoryGroup == commodities (or) Alternative (or) Money market  =>  Others
-        // BroadCategoryGroup == Equity && CategoryName == ELSS (Tax Savings)  => ELSS
-        // CategoryName !=  'ELSS (Tax Savings)'  => Equity
+        
     }
     /**
      * Show the form for creating a new resource.

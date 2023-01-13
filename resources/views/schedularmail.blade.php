@@ -13,7 +13,7 @@
             <h2> Hii,</h2>
             <h3>{{$schedule}} </h3>
 
-               <h4> This Api through the error,latest  data is not updated proprely, kindly check  this API ,solve the problem ASAP. </h4>
+               <h4> This Api throw the error,Latest  data is not updated proprely, kindly check  this API ,solve the problem ASAP. </h4>
             
 
     <!-- Optional JavaScript -->
