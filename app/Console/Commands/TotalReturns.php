@@ -9,9 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Traits\MfTrait;
 class TotalReturns extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -43,10 +44,9 @@ class TotalReturns extends Command
      */
     public function handle()
     {
-
         Log::info('Total Return - Start');
         try {
-            $response   =  Http::get('https://api.morningstar.com/v2/service/mf/x2plgdu4r8bj1pyi/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response   =  Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/totalReturns');
 
             $data       =  json_decode($response, true);
 

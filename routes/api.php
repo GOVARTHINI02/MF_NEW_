@@ -17,6 +17,7 @@ use GuzzleHttp\Client;
 */
 
 Route::get('new',[MFController::class,'create']);
+Route::get('go',[MFController::class,'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

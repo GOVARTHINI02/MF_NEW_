@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('annual-report-fee')->dailyAt('12:54');
+        $schedule->command('annual-report-fee')->everyMinute();
         $schedule->command('annual-report-financials')->dailyAt('12:58');
         $schedule->command('fee-schedules')->dailyAt('13:03');
         $schedule->command('investment-criteria')->dailyAt('13:07');

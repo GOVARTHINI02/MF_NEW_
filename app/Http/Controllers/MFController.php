@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ErrorMail;
 use App\Mail\Exception;
 use App\Models\AmcBasicInfo;
-use App\Models\Annual_report_fees;
+
+use App\Models\AnnualReportFees;
 use App\Models\AnnualReportFinancial;
 use App\Models\FeeSchedule;
 use App\Models\FundBasicInfo;
@@ -25,12 +27,17 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Return_;
-
-use function Ramsey\Uuid\v1;
+use App\Traits\MfTrait;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class MFController extends Controller
+   
 {
+
+    use MfTrait;
     /**
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -39,7 +46,6 @@ class MFController extends Controller
 
     public function index()
     {
-        
     }
     /**
      * Show the form for creating a new resource.
@@ -48,24 +54,46 @@ class MFController extends Controller
      */
     public function store()
     {
-        $response       =   Http::get('https://api.morningstar.com/service/mf/Price/isin/INF209K01P23?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&startdate=2020-02-01&enddate=2021-02-17&format=json&=');
-        // print_r('<pre>');
-        $data           =   json_decode($response, true);
-        // print_r($data);
-        // die;
-        if ($data['status']['message'] == "OK") {
+       return($this->edit());
+       
+        Log::info('Annual report fees - start');
+        
+        try {
+            
+            $response   =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFees');
+            $data       =   json_decode($response, true);
 
-            foreach ($data['data']['Prices'] as $value) {
+            if ($data['status']['message'] == "OK") {
 
-                    $details             =    new HistoricNav;
-                    $details->nav_date   =    $value['d'] ?? null;
-                    $details->nav_value  =    $value['v'] ?? null;
-                    $details->save();
-                               
-                
+                foreach ($data['data'] as $value) {
+
+                    if (key_exists('api', $value)) {
+                        $details                            =   new AnnualReportFees;
+                        $details->MStarID                   =   $value['api']['DP-MStarID'] ?? null;
+                        $details->ISIN                      =   $value['api']['DP-ISIN'] ?? null;
+                        $details->AnnualReportDate          =   $value['api']['ARF-AnnualReportDate'] ?? null;
+                        $details->NetExpenseRatio           =   $value['api']['ARF-NetExpenseRatio'] ?? null;
+                        $details->InterimNetExpenseRatio    =   $value['api']['ARF-InterimNetExpenseRatio'] ?? null;
+                        $details->save();
+                    }
+                }
+
+                AnnualReportFees::where('created_at', '<', Carbon::today())->delete();
+            } else {
+                Log::info('Annual report fees - error' . $response);
             }
+        
+        } catch (\Throwable $th) {
+            $schedule = "Annual Report Fees";
+            Log::info($th);
+            AnnualReportFees::whereDate('created_at', Carbon::today())->delete();
+            Mail::to('priyachaubey@aliceblueindia.com')->send(new ErrorMail($schedule));
         }
+
+        Log::info('Annual report fees - end');
     }
+
+    
 
 
     /**
@@ -163,9 +191,35 @@ class MFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $file = storage_path('mffile.txt');
+        $myfile = fopen($file, "r")  or die("Unable to open file!");
+        $fund =   fread($myfile, filesize($file));
+        fclose($myfile);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL   => 'https://bsestarmf.in/RptSettlementMaster.aspx',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('__VIEWSTATE' => $fund, '__VIEWSTATEGENERATOR' =>  'B6D58731', '__EVENTVALIDATION' =>
+            'sCPgP1WWCleE3mUVcm%2B99kGtMpUFwaQL6OdvJAbELrOUJSoHYuldLnoHedIASfatQR27PlWmVXyqJu%2FuIlVOjhLHNzivvfx8Jo%2BTuUItIv3ifEmxwwYmscLxn8KDb2HHEgFRzwOFPiiW%2BWtR', 'btnText' => 'Export to Text'),
+            CURLOPT_HTTPHEADER => array(
+                'Accept: application/json',
+                'Content-Length: 6775482'
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $response;
+        print_r($response);
     }
 
     /**
@@ -174,10 +228,10 @@ class MFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    // public function edit()
+    // {
+    //     
+    //  }
 
     /**
      * Update the specified resource in storage.

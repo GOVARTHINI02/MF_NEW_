@@ -9,9 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Traits\MfTrait;
 class HistoricNavs extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -47,7 +48,7 @@ class HistoricNavs extends Command
 
         try {
 
-            $response = Http::get('https://api.morningstar.com/service/mf/Price/isin/INF209K01P23?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&startdate=2020-02-01&enddate=2021-02-17&format=json&=');
+            $response = Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/historicNAVs?start_date=2022-12-11&end_date=2022-12-31&isin=INF209K01P23');
 
             $data = json_decode($response, true);
 

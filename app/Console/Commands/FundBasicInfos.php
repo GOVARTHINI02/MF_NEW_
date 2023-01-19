@@ -9,9 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Traits\MfTrait;
 class FundBasicInfos extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -46,7 +47,7 @@ class FundBasicInfos extends Command
         Log::info('Fund Basic Info - Start');
         try {
 
-            $response = Http::get('https://api.morningstar.com/v2/service/mf/q44i4g1hofp4tw8y/universeid/xlf5e5g9pqeffzs0?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response = Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/fundBasicInfo');
 
             $data = json_decode($response, true);
 
@@ -76,20 +77,22 @@ class FundBasicInfos extends Command
 
                         if ($value['api']['FSCBI-BroadCategoryGroup'] == 'Fixed Income') {
                             $details->Alice_category = 'Fixed Income';
-                            $details->save();
+                           
                         } elseif ($value['api']['FSCBI-BroadCategoryGroup'] == 'Allocation') {
                             $details->Alice_category = 'Hybrid';
-                            $details->save();
+                           
                         } elseif (($value['api']['FSCBI-BroadCategoryGroup'] == 'commodities') || ($value['api']['FSCBI-BroadCategoryGroup'] == 'Alternative') || ($value['api']['FSCBI-BroadCategoryGroup'] == 'Money market')) {
                             $details->Alice_category = 'Other';
-                            $details->save();
+                           
                         } elseif (($value['api']['FSCBI-BroadCategoryGroup'] == 'Equity') &&  ($value['api']['FSCBI-CategoryName'] == 'ELSS (Tax Savings)')) {
                             $details->Alice_category = 'ELSS';
-                            $details->save();
-                        } elseif (($value['api']['FSCBI-BroadCategoryGroup'] == 'Equity') && ($value['api']['FSCBI-CategoryName'] != 'ELSS (Tax Savings)')) {
+                           
+                        } elseif($value['api']['FSCBI-CategoryName'] != 'ELSS (Tax Savings)') {
                             $details->Alice_category = 'Equity';
-                            $details->save();
+                           
                         }
+                            $details->save();
+
                     }
                 }
                 FundBasicInfo::where('created_at', '<', Carbon::today())->delete();

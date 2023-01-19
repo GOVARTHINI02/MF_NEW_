@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Mail\ErrorMail;
 use App\Models\AmcBasicInfo;
 use Carbon\Carbon;
+use App\Traits\MfTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class AmcBasicInfos extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -46,7 +48,7 @@ class AmcBasicInfos extends Command
         Log::info('Amc Basic Info - start');
         try {
 
-            $response       =   Http::get('https://api.morningstar.com/v2/service/mf/dctlquvshh3f2yvo/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/amcBasicInfo');
             $data           =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

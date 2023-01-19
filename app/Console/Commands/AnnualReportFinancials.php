@@ -6,7 +6,7 @@ use App\Mail\ErrorMail;
 use App\Mail\Exception;
 use App\Models\AnnualReportFinancial;
 use Carbon\Carbon;
-
+use App\Traits\MfTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class AnnualReportFinancials extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -47,7 +48,7 @@ class AnnualReportFinancials extends Command
     {
         Log::info('Annual report financial - start');
         try {
-            $response       =   Http::get('https://api.morningstar.com/v2/service/mf/v92dw4hxtlpn3k9x/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');          
+            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFinancials');          
             $data           =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

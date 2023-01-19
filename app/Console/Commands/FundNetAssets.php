@@ -9,9 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Traits\MfTrait;
 class FundNetAssets extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -47,7 +48,7 @@ class FundNetAssets extends Command
 
         try {
 
-            $response   =   Http::get('https://api.morningstar.com/v2/service/mf/fuc1yk0i4y0gtaa5/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response   =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/fundNetAssets');
             $data       =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

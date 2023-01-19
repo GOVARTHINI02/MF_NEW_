@@ -9,9 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use App\Traits\MfTrait;
 class Top10Holdings extends Command
 {
+    use MfTrait;
     /**
      * The name and signature of the console command.
      *
@@ -46,7 +47,7 @@ class Top10Holdings extends Command
         Log::info('Top10Holding - Start');
         try {
 
-            $response  =  Http::get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response  =  Http::withToken($this->edit())->get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
 
             $data = json_decode($response, true);
 
