@@ -48,7 +48,7 @@ class HistoricNavs extends Command
 
         try {
 
-            $response = Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/historicNAVs?start_date=2022-12-11&end_date=2022-12-31&isin=INF209K01P23');
+            $response = Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/historicNAVs?start_date=2022-12-11&end_date=2022-12-31&isin=INF209K01P23');
 
             $data = json_decode($response, true);
 

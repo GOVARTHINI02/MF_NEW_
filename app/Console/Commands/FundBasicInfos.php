@@ -47,7 +47,7 @@ class FundBasicInfos extends Command
         Log::info('Fund Basic Info - Start');
         try {
 
-            $response = Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/fundBasicInfo');
+            $response = Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/fundBasicInfo');
 
             $data = json_decode($response, true);
 

@@ -16,6 +16,7 @@ use App\Models\FundNetAsset;
 use App\Models\HistoricNav;
 use App\Models\HistoricNavs;
 use App\Models\InvestmentCriteria;
+use App\Models\MfLogin;
 use App\Models\SchemaMaster;
 use App\Models\Top10Holding;
 use App\Models\User;
@@ -54,8 +55,10 @@ class MFController extends Controller
      */
     public function store()
     {
-       return($this->edit());
-       
+        // return 'hii';
+    // $fund = MfLogin::where('token',)->first();
+    // return $fund;
+    //    return ($this->edit());
         Log::info('Annual report fees - start');
         
         try {
@@ -228,10 +231,39 @@ class MFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit()
-    // {
-    //     
-    //  }
+//     public function edit()
+//     {
+//           $response = Http::asForm()->withHeaders([
+//         'Connection'    => 'keep-alive',
+//         'Content-Type'  => 'application/x-www-form-urlencoded'
+//     ])->post('https://mwareuat.aliceblueonline.com:8443/realms/back-office-middleware-realm/protocol/openid-connect/token', [
+// 
+//         'client_id'     => 'back-office-middleware',
+//         'client_secret' => 'o8xFjtAYhLDyQGrMc6DLDVj7QuKasjjt',
+//         'scope'         =>  'openid offline_access',
+//         'grant_type'    => 'client_credentials',
+//     ]);
+// 
+//         $token         =   MfLogin::updateOrCreate(
+//     
+//         [
+//             'token'         =>   ($response['access_token'])
+//         ],
+//         [
+//             'login_at' =>   Carbon::now(),
+//             'expiary_at' => Carbon::today()->addHours(12)
+//         ]
+// 
+//     );
+//     // $flight = Flight::updateOrCreate(
+//     //     ['departure' => 'Oakland', 'destination' => 'San Diego'],
+//     //     ['price' => 99, 'discounted' => 1]
+//     // );
+//    
+//     return $response['access_token'];
+// 
+// }
+     
 
     /**
      * Update the specified resource in storage.

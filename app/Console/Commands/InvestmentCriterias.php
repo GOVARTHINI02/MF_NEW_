@@ -47,7 +47,7 @@ class InvestmentCriterias extends Command
         Log::info('Investment Criteria - Start');
 
         try {
-            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/investmentCriteria');
+            $response       =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/investmentCriteria');
 
             $data           =   json_decode($response, true);
 

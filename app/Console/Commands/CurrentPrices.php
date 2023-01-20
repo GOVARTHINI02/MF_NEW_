@@ -47,7 +47,7 @@ class CurrentPrices extends Command
         Log::info('Current Price - Start');
 
         try {
-            $response =  Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/currentPrice');
+            $response =  Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/currentPrice');
             $data  = json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

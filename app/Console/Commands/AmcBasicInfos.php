@@ -48,7 +48,7 @@ class AmcBasicInfos extends Command
         Log::info('Amc Basic Info - start');
         try {
 
-            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/amcBasicInfo');
+            $response       =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/amcBasicInfo');
             $data           =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {
@@ -117,7 +117,7 @@ class AmcBasicInfos extends Command
                             $details->Registration_AddressLine1         =   $value['api']['AMCBI-RegistrationCompanies'][0]['AddressLine1'] ?? null;
                             $details->Registration_AddressLine2         =   $value['api']['AMCBI-RegistrationCompanies'][0]['AddressLine2'] ?? null;
                             $details->Registration_City                 =   $value['api']['AMCBI-RegistrationCompanies'][0]['City'] ?? null;
-                            $details->Registration_CompanyId            =   $value['api']['AMCBI-RegistrationCompanies'][0]['CompanyID'] ?? null;
+                            $details->Registration_CompanyId            =   $value['api']['AMCBI-RegistrationCompanies'][0]['CompanyId'] ?? null;
                             $details->Registration_CompanyName          =   $value['api']['AMCBI-RegistrationCompanies'][0]['CompanyName'] ?? null;
                             $details->Registration_CountryId            =   $value['api']['AMCBI-RegistrationCompanies'][0]['CountryId'] ?? null;
                             $details->Registration_Fax                  =   $value['api']['AMCBI-RegistrationCompanies'][0]['Fax'] ?? null;

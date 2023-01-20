@@ -47,7 +47,7 @@ class Top10Holdings extends Command
         Log::info('Top10Holding - Start');
         try {
 
-            $response  =  Http::withToken($this->edit())->get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
+            $response  =  Http::withToken($this->accesstoken())->get('https://api.morningstar.com/v2/service/mf/fokr7wm4cxjcrc6v/universeid/i9t7jgix6xje3x87?accesscode=egfnfxsxo1rklo0z0su56i9htuu2j49y&format=json');
 
             $data = json_decode($response, true);
 
@@ -71,6 +71,7 @@ class Top10Holdings extends Command
                                 $details->MarketValue                       =   $rows['MarketValue'] ?? null;
                                 $details->ShareChange                       =   $rows['ShareChange'] ?? null;
                                 $details->MaturityDate                      =   $rows['MaturityDate'] ?? null;
+                                $details->Coupon                            =   $rows['Coupon'] ?? null;
                                 $details->IndianCreditQualityClassification =   $rows['IndianCreditQualityClassification'] ?? null;
                                 $details->SectorId                          =   $rows['SectorId'] ?? null;
                                 $details->Sector                            =   $rows['Sector'] ?? null;

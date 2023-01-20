@@ -48,7 +48,7 @@ class FundBenchmarks extends Command
 
         try {
 
-            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/fundBenchmarks');
+            $response       =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/fundBenchmarks');
 
             $data           =   json_decode($response, true);
 
@@ -94,6 +94,7 @@ class FundBenchmarks extends Command
         $details->MStarID               =   $value['api']['DP-MStarID'] ?? null;
         $details->ISIN                  =   $value['api']['DP-ISIN'] ?? null;
         $details->PrimaryIndexId        =   $value['api']['FB-PrimaryIndexId'] ?? null;
+        $details->PrimaryIndexName       =   $value['api']['FB-PrimaryIndexName'] ?? null;
         $details->IndexId               =   $row['IndexId'] ?? null;
         $details->IndexName             =   $row['IndexName'] ?? null;
         $details->Weighting             =   $row['Weighting'] ?? null;

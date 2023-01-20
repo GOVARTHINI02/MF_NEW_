@@ -47,7 +47,7 @@ class MorningstarRatings extends Command
         Log::info('Morning star Rating - Start');
 
         try {
-            $response =  Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/morningstarRating');
+            $response =  Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/morningstarRating');
             $data  = json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {
@@ -62,7 +62,7 @@ class MorningstarRatings extends Command
                         $details->NumberOfFunds10Year           =  $value['api']['MR-NumberOfFunds10Year'] ?? null;
                         $details->NumberOfFunds3Year            =  $value['api']['MR-NumberOfFunds3Year'] ?? null;
                         $details->NumberOfFunds5Year            =  $value['api']['MR-NumberOfFunds5Year'] ?? null;
-                        $details->NumberOfFundsOverall          =  $value['api']['TS-MR-NumberOfFundsOverall'] ?? null;
+                        $details->NumberOfFundsOverall          =  $value['api']['MR-NumberOfFundsOverall'] ?? null;
                         $details->PerformanceScore3Yr           =  $value['api']['MR-PerformanceScore3Yr'] ?? null;
                         $details->PerformanceScoreOverall       =  $value['api']['MR-PerformanceScoreOverall'] ?? null;
                         $details->Rating3Year                   =  $value['api']['MR-Rating3Year'] ?? null;

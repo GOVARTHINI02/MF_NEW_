@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\Http;
 
- trait MfTrait {
+trait MfTrait
+{
 
-    public function edit()
-    {
+
+    public function createToken(){
+
+
         $response = Http::asForm()->withHeaders([
             'Connection'    => 'keep-alive',
             'Content-Type'  => 'application/x-www-form-urlencoded'
@@ -23,18 +26,40 @@ use Illuminate\Support\Facades\Http;
             'grant_type'    => 'client_credentials',
         ]);
 
-        $token              =   new MfLogin;
+        $token  =   MfLogin::first();
+
+        if(!$token){
+
+            $token  =   new MfLogin;
+        }
+        
         $token->token       =   $response['access_token'];
         $token->login_at    =   Carbon::now();
-        $token->expiary_at  =   Carbon::today()->addHours(12);
+        $token->expiary_at  =   Carbon::now()->addHours(12);
         $token->save();
         return $response['access_token'];
 
-       
     }
 
+    public function accesstoken()
+    {
+        $fund =   MfLogin::first();
+    
+        if ($fund) {
 
+            if (Carbon::now() < $fund->expiary_at) {
+             
+                return $fund->token;
+                
+            } else {
+               
+                return $this->createToken();
+            }
+        }else{
+          
+           return $this->createToken();
 
+        }
+    }
+}
 
-
- }

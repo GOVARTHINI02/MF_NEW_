@@ -48,7 +48,7 @@ class AnnualReportFinancials extends Command
     {
         Log::info('Annual report financial - start');
         try {
-            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFinancials');          
+            $response       =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFinancials');          
             $data           =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

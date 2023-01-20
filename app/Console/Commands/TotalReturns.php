@@ -46,7 +46,7 @@ class TotalReturns extends Command
     {
         Log::info('Total Return - Start');
         try {
-            $response   =  Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/totalReturns');
+            $response   =  Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/totalReturns');
 
             $data       =  json_decode($response, true);
 

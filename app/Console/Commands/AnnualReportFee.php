@@ -50,7 +50,7 @@ class AnnualReportFee extends Command
         
         try {
             
-            $response   =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFees');
+            $response   =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/annualReportFees');
             $data       =   json_decode($response, true);
 
             if ($data['status']['message'] == "OK") {

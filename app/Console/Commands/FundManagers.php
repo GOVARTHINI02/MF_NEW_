@@ -50,7 +50,7 @@ class FundManagers extends Command
 
         try {
 
-            $response       =   Http::withToken($this->edit())->get('https://middleware.aliceblueonline.com:8181/mstar/fundManagers');
+            $response       =   Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/fundManagers');
 
             $data           =   json_decode($response, true);
 
