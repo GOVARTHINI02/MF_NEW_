@@ -55,9 +55,9 @@ class CreateSchemaMastersTable extends Migration
             $table->string('exit_load_flag');
             $table->string('exit_load');
             $table->string('lock_in_period_flag');
-            $table->string('lock_in_period	');
+            $table->string('lock_in_period');
             $table->string('channel_partner_code');
-            $table->string('reOpeningDate	');    
+            $table->string('reOpeningDate');    
             $table->timestamps();
         });
     }
