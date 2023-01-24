@@ -13,8 +13,5 @@ class MfLogin extends Model
 
     protected $primaryKey = 'id';
     protected $fillable = ['token','login_at','expiary_at'];
-    // $flight = Flight::updateOrCreate(
-    //     ['departure' => 'Oakland', 'destination' => 'San Diego'],
-    //     ['price' => 99, 'discounted' => 1]
-    // );
+   
 }

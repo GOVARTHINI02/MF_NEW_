@@ -13,7 +13,7 @@ class CreateIsinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('isins', function (Blueprint $table) {
+        Schema::create('isin', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

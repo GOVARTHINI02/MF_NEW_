@@ -13,7 +13,7 @@ class CreateFundBasicInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('fund_basic_infos', function (Blueprint $table) {
+        Schema::create('fund_basic_info', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

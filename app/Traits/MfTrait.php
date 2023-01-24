@@ -5,16 +5,14 @@ namespace App\Traits;
 use App\Models\MfLogin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon as SupportCarbon;
+
 use Illuminate\Support\Facades\Http;
 
 trait MfTrait
 {
 
-
     public function createToken(){
-
-
+        
         $response = Http::asForm()->withHeaders([
             'Connection'    => 'keep-alive',
             'Content-Type'  => 'application/x-www-form-urlencoded'

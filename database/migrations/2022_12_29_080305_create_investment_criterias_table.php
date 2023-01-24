@@ -13,7 +13,7 @@ class CreateInvestmentCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('investment_criterias', function (Blueprint $table) {
+        Schema::create('investment_criteria', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

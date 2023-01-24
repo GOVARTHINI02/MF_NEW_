@@ -13,7 +13,7 @@ class CreateCurrentPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('current_prices', function (Blueprint $table) {
+        Schema::create('current_price', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

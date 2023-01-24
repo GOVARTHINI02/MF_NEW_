@@ -14,7 +14,7 @@ class CreateDailyNavPerformancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('daily_nav_performances', function (Blueprint $table) {
+        Schema::create('daily_nav_performance', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

@@ -13,7 +13,7 @@ class CreateMorningstarRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('morningstar_ratings', function (Blueprint $table) {
+        Schema::create('morningstar_rating', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

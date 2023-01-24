@@ -13,7 +13,7 @@ class CreateFeeSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fee_schedules', function (Blueprint $table) {
+        Schema::create('fee_schedule', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('ISIN')->nullable();

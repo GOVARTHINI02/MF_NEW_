@@ -55,10 +55,7 @@ class MFController extends Controller
      */
     public function store()
     {
-        // return 'hii';
-    // $fund = MfLogin::where('token',)->first();
-    // return $fund;
-    //    return ($this->edit());
+       
         Log::info('Annual report fees - start');
         
         try {

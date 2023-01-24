@@ -13,7 +13,7 @@ class CreateAmcBasicInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('amc_basic_infos', function (Blueprint $table) {
+        Schema::create('amc_basic_info', function (Blueprint $table) {
             $table->id();
             $table->string('MStarID')->nullable();
             $table->string('Admin_CompanyID')->nullable();

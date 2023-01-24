@@ -13,17 +13,17 @@ class CreateSchemaMastersTable extends Migration
      */
     public function up()
     {
-        Schema::create('schema_masters', function (Blueprint $table) {
+        Schema::create('scheme_master_data', function (Blueprint $table) {
             $table->id();
             $table->string('unique_no');
-            $table->string('schema_code');
-            $table->string('rta_schema_code');
-            $table->string('amc_schema_code');
+            $table->string('scheme_code');
+            $table->string('rta_scheme_code');
+            $table->string('amc_scheme_code');
             $table->string('isin');
             $table->string('amc_code');
             $table->string('scheme_type');
-            $table->string('schema_plan');
-            $table->string('schema_name');
+            $table->string('scheme_plan');
+            $table->string('scheme_name');
             $table->string('purchase_allowed');
             $table->string('purchase_transaction_mode');
             $table->string('minimum_purchase_amount');
@@ -54,10 +54,10 @@ class CreateSchemaMastersTable extends Migration
             $table->string('end_date');
             $table->string('exit_load_flag');
             $table->string('exit_load');
-            $table->string('lockin_period_flag');
-            $table->string('lockin_period');
+            $table->string('lock_in_period_flag');
+            $table->string('lock_in_period	');
             $table->string('channel_partner_code');
-            $table->string('reopening_date');    
+            $table->string('reOpeningDate	');    
             $table->timestamps();
         });
     }
