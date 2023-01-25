@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FundBasicInfo extends Model
 {
     use HasFactory;
+    protected $table = "fund_basic_info";
 }

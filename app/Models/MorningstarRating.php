@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class MorningstarRating extends Model
 {
     use HasFactory;
+    protected $table = "morningstar_rating";
 }

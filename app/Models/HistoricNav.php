@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class HistoricNav extends Model
 {
     use HasFactory;
+  protected $table = "historic_navs";
 }

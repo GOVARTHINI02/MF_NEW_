@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Isin extends Model
 {
     use HasFactory;
+    protected $table = "isin";
 }

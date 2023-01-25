@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class InvestmentCriteria extends Model
 {
     use HasFactory;
+    protected $table = "investment_criteria";
 }

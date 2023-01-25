@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class AmcBasicInfo extends Model
 {
     use HasFactory;
+    protected $table= "amc_basic_info";
 }

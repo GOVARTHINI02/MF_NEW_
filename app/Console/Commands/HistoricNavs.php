@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\ErrorMail;
 use App\Models\HistoricNav;
+use App\Models\Isin;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -47,6 +48,8 @@ class HistoricNavs extends Command
         Log::info('Historic Nav - Start');
 
         try {
+
+            // $isins = Isin::where(ISIN)
 
             $response = Http::withToken($this->accesstoken())->get('https://middleware.aliceblueonline.com:8181/mstar/historicNAVs?start_date=2022-12-11&end_date=2022-12-31&isin=INF209K01P23');
 

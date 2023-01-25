@@ -15,22 +15,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('annual-report-fee')->dailyAt('21:01');
-        $schedule->command('annual-report-financials')->dailyAt('21:03');
-        $schedule->command('fee-schedules')->dailyAt('21:05');
-        $schedule->command('investment-criteria')->dailyAt('21:07');
-        $schedule->command('amc-basic-info')->dailyAt('21:10');
-        $schedule->command('fund-benchmark')->dailyAt('21:13');
-        $schedule->command('fundnet-asset')->dailyAt('21:16');
-        $schedule->command('fund-manager')->dailyAt('21:19');
-        $schedule->command('total-return')->dailyAt('21:23');
-        $schedule->command('current-price')->dailyAt('21:26');
-        $schedule->command('morningstar-rating')->dailyAt('21:30');
-        $schedule->command('dailynav-performance')->dailyAt('21:33');
-        $schedule->command('isin')->dailyAt('21:36');
-        $schedule->command('top10holding')->dailyAt('21:39');
-        $schedule->command('fund-basic-infos')->dailyAt('21:43');
-        $schedule->command('historic-navs')->dailyAt('21:46');
+        // $schedule->command('annual-report-fee')->dailyAt('13:05');
+        // $schedule->command('annual-report-financials')->dailyAt('13:08');
+        // $schedule->command('fee-schedules')->dailyAt('14:01');
+        // $schedule->command('investment-criteria')->dailyAt('14:03');
+        // $schedule->command('amc-basic-info')->dailyAt('14:05');
+        // $schedule->command('fund-benchmark')->dailyAt('13:23');
+        // $schedule->command('fundnet-asset')->dailyAt('13:24');
+        // $schedule->command('fund-manager')->dailyAt('13:28');
+        // $schedule->command('total-return')->dailyAt('13:32');
+        // $schedule->command('current-price')->dailyAt('13:36');
+        // $schedule->command('morningstar-rating')->dailyAt('13:40');
+        // $schedule->command('dailynav-performance')->dailyAt('13:44');
+        // $schedule->command('isin')->dailyAt('13:47');
+        // $schedule->command('top10holding')->dailyAt('13:51');
+        // $schedule->command('fund-basic-infos')->dailyAt('13:54');
+        // $schedule->command('historic-navs')->dailyAt('13:58');
+         $schedule->command('scheme-master')->dailyAt('19:47');
         
     }
 

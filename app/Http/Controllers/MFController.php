@@ -125,64 +125,71 @@ class MFController extends Controller
         // print_r('<pre>');
         $response;
         // echo nl2br($response, false);
+      
         $array =  explode("\n", $response);
-
+        // $count = [];
         foreach ($array  as  $key => $val) {
             if ($val) {
                 $funds = (explode("|", $val));
-
-                if ($funds[7] == 'Direct'  &&  $funds[9] == 'y'  &&  $funds[10] == 'DP' || $funds[10] == 'D' && $funds[15] == '13:00:00' || $funds[15] == '14:30:00' || $funds[15] == '15:00:00' && $funds[17] == 'D' || $funds[17] == 'DP' &&  $funds[27] == 'N' || $funds[27] == 'Z' &&  $funds[5] == 'NJMUTUALFUND_MF' || $funds[5] == 'SAMCOMUTUALFUND_MF' || $funds[5] == 'TRUSTMUTUALFUND_MF') {
-
+         
+                if ($funds[7] == 'DIRECT'  &&  $funds[9] == 'Y' &&  ($funds[10] == 'DP' || $funds[10] == 'D') && ($funds[15] == '13:00:00' || $funds[15] == '14:30:00' || $funds[15] == '15:00:00') && ($funds[17] == 'D' || $funds[17] == 'DP') &&  ($funds[27] == 'N' || $funds[27] == 'Z') &&  ($funds[5] != 'NJMUTUALFUND_MF' || $funds[5] != 'SAMCOMUTUALFUND_MF' || $funds[5] != 'TRUSTMUTUALFUND_MF')) {
+                    
+                    //   if($key != 0){
+                        // $count[]    =   $funds[7];
+                    //   }
                     if ($key != 0) {
-                        $value                                  =  new SchemaMaster;
-                        $value->unique_no                       =  $funds[0];
-                        $value->schema_code                     =  $funds[1];
-                        $value->rta_schema_code                 =  $funds[2];
-                        $value->amc_schema_code                 =  $funds[3];
-                        $value->isin                            =  $funds[4];
-                        $value->amc_code                        =  $funds[5];
-                        $value->scheme_type                     =  $funds[6];
-                        $value->schema_plan                     =  $funds[7];
-                        $value->schema_name                     =  $funds[8];
-                        $value->purchase_allowed                =  $funds[9];
-                        $value->purchase_transaction_mode       =  $funds[10];
-                        $value->minimum_purchase_amount         =  $funds[11];
-                        $value->additional_purchase_amount      =  $funds[12];
-                        $value->maximum_purchase_amount         =  $funds[13];
-                        $value->purchase_amount_multiplier      =  $funds[14];
-                        $value->purchase_cutoff_time            =  $funds[15];
-                        $value->redemption_allowed              =  $funds[16];
-                        $value->redemption_transaction_mode     =  $funds[17];
-                        $value->minimum_redemption_qty          =  $funds[18];
-                        $value->redemption_qty_multiplier       =  $funds[19];
-                        $value->maximum_redemption_qty          =  $funds[20];
-                        $value->redemption_amount_minimum       =  $funds[21];
-                        $value->redemption_amount_maximum       =  $funds[22];
-                        $value->redemption_amount_multiple      =  $funds[23];
-                        $value->redemption_cutoff_time          =  $funds[24];
-                        $value->rta_agent_code                  =  $funds[25];
-                        $value->amc_active_flag                 =  $funds[26];
-                        $value->dividend_reinvestment_flag      =  $funds[27];
-                        $value->sip_flag                        =  $funds[28];
-                        $value->stp_flag                        =  $funds[29];
-                        $value->swp_flag                        =  $funds[30];
-                        $value->switch_flag                     =  $funds[31];
-                        $value->settlement_type                 =  $funds[32];
-                        $value->amc_ind                         =  $funds[33];
-                        $value->face_value                      =  $funds[34];
-                        $value->start_date                      =  $funds[35];
-                        $value->end_date                        =  $funds[36];
-                        $value->exit_load_flag                  =  $funds[37];
-                        $value->exit_load                       =  $funds[38];
-                        $value->lockin_period_flag              =  $funds[39];
-                        $value->lockin_period                   =  $funds[40];
-                        $value->channel_partner_code            =  $funds[41];
-                        $value->reopening_date                  =  $funds[42];
-                        $value->save();
+                            $value                                  =  new SchemaMaster;
+                            $value->unique_no                       =  $funds[0];
+                            $value->scheme_code                     =  $funds[1];
+                            $value->rta_scheme_code                 =  $funds[2];
+                            $value->amc_scheme_code                 =  $funds[3];
+                            $value->isin                            =  $funds[4];
+                            $value->amc_code                        =  $funds[5];
+                            $value->scheme_type                     =  $funds[6];
+                            $value->scheme_plan                     =  $funds[7];
+                            $value->scheme_name                     =  $funds[8];
+                            $value->purchase_allowed                =  $funds[9];
+                            $value->purchase_transaction_mode       =  $funds[10];
+                            $value->minimum_purchase_amount         =  $funds[11];
+                            $value->additional_purchase_amount      =  $funds[12];
+                            $value->maximum_purchase_amount         =  $funds[13];
+                            $value->purchase_amount_multiplier      =  $funds[14];
+                            $value->purchase_cutoff_time            =  $funds[15];
+                            $value->redemption_allowed              =  $funds[16];
+                            $value->redemption_transaction_mode     =  $funds[17];
+                            $value->minimum_redemption_qty          =  $funds[18];
+                            $value->redemption_qty_multiplier       =  $funds[19];
+                            $value->maximum_redemption_qty          =  $funds[20];
+                            $value->redemption_amount_minimum       =  $funds[21];
+                            $value->redemption_amount_maximum       =  $funds[22];
+                            $value->redemption_amount_multiple      =  $funds[23];
+                            $value->redemption_cutoff_time          =  $funds[24];
+                            $value->rta_agent_code                  =  $funds[25];
+                            $value->amc_active_flag                 =  $funds[26];
+                            $value->dividend_reinvestment_flag      =  $funds[27];
+                            $value->sip_flag                        =  $funds[28];
+                            $value->stp_flag                        =  $funds[29];
+                            $value->swp_flag                        =  $funds[30];
+                            $value->switch_flag                     =  $funds[31];
+                            $value->settlement_type                 =  $funds[32];
+                            $value->amc_ind                         =  $funds[33];
+                            $value->face_value                      =  $funds[34];
+                            $value->start_date                      =  $funds[35];
+                            $value->end_date                        =  $funds[36];
+                            $value->exit_load_flag                  =  $funds[37];
+                            $value->exit_load                       =  $funds[38];
+                            $value->lock_in_period_flag             =  $funds[39];
+                            $value->lock_in_period                  =  $funds[40];
+                            $value->channel_partner_code            =  $funds[41];
+                            $value->reOpeningDate                   =  $funds[42];
+                           // log::info($value);
+                            $value->save();                      
                     }
                 }
             }
         }
+
+        // return count($count);
     }
 
     /**
@@ -209,18 +216,19 @@ class MFController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array('__VIEWSTATE' => $fund, '__VIEWSTATEGENERATOR' =>  'B6D58731', '__EVENTVALIDATION' =>
-            'sCPgP1WWCleE3mUVcm%2B99kGtMpUFwaQL6OdvJAbELrOUJSoHYuldLnoHedIASfatQR27PlWmVXyqJu%2FuIlVOjhLHNzivvfx8Jo%2BTuUItIv3ifEmxwwYmscLxn8KDb2HHEgFRzwOFPiiW%2BWtR', 'btnText' => 'Export to Text'),
+            'X0nuY49Lz+QRB5EJh/+j8LbWaMZX0iSF4cXvNDzFXBjqyFsSrsykiZHktI9a+qqtEr30Qf1rpmigFf5lTNX4uvmglvufKWFRhUjixE9jN5tLkFImGgNm2vEcEarp+fi4GgQfx3uJiD59ecP0', 'btnText' => 'Export to Text'),
             CURLOPT_HTTPHEADER => array(
                 'Accept: application/json',
-                'Content-Length: 6775482'
+                'Content-Length:6777172'
             ),
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-
         $response;
         print_r($response);
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

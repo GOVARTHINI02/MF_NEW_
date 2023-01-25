@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CurrentPrice extends Model
 {
     use HasFactory;
+    protected $table= "current_price";
 }
