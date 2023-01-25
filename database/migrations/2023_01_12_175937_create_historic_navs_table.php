@@ -17,6 +17,7 @@ class CreateHistoricNavsTable extends Migration
             $table->id();
             $table->string('nav_date')->nullable();
             $table->string('nav_value')->nullable();
+            $table->string('ISIN')->nullable();
             $table->timestamps();
         });
     }
